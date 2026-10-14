@@ -29,7 +29,11 @@ var APP = "https://script.google.com/macros/s/AKfycbwuw_rZxXCdu-Fp0bAg-mm9NO1wlt
 var T = APP + (location.search || "");
 var ua = navigator.userAgent || "";
 var go = document.getElementById("go");
-if (/KAKAOTALK/i.test(ua)) {
+if (/[?&]p=about(&|$)/.test(location.search)) {
+  // 회사 소개는 GitHub 안의 페이지로 (구글 로그인 · 카카오톡과 상관없이 열림)
+  go.href = "about/";
+  location.replace("about/");
+} else if (/KAKAOTALK/i.test(ua)) {
   // 카카오톡 안의 브라우저에서는 구글 웹앱이 열리지 않음 → 휴대폰 기본 브라우저(크롬·사파리)로 넘김
   var ext = "kakaotalk://web/openExternal?url=" + encodeURIComponent(T);
   go.href = ext;
