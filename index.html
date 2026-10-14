@@ -2,54 +2,31 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>TY 그룹웨어</title>
 <meta property="og:title" content="TY 그룹웨어">
 <meta property="og:description" content="티지와이 · 티와이 · 선교농원 · 티지와이F&amp;B">
-<style>
-  body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;background:#0d2a1c;color:#fff;text-align:center;padding:24px;box-sizing:border-box}
-  .b{max-width:360px}
-  h1{font-size:22px;margin:0 0 8px}
-  p{opacity:.8;font-size:15px;line-height:1.6;margin:0 0 22px}
-  a{display:block;padding:15px;border-radius:12px;background:#e8930c;color:#2a1600;font-weight:800;text-decoration:none;font-size:17px}
-  small{display:block;margin-top:14px;opacity:.6;font-size:13px;line-height:1.5}
-</style>
+<style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#0d2a1c;color:#fff;font-family:-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;text-align:center;padding:24px;box-sizing:border-box}
+.sp{width:34px;height:34px;margin:0 auto 14px;border-radius:50%;border:4px solid rgba(255,255,255,.2);border-top-color:#e8930c;animation:r .8s linear infinite}@keyframes r{to{transform:rotate(360deg)}}
+a{color:#ffc565}</style>
 </head>
 <body>
-<div class="b">
-  <h1>TY 그룹웨어</h1>
-  <p>잠시 후 화면이 열립니다.</p>
-  <a id="go" href="#">열기</a>
-  <small id="hint"></small>
-</div>
+<div><div class="sp"></div><div id="m">TY 그룹웨어를 여는 중…</div></div>
 <script>
-// 그룹웨어 웹앱 주소 (배포 주소가 바뀌면 이 한 줄만 고침)
+/* 그룹웨어 화면을 Apps Script 에서 받아 이 주소(GitHub) 안에서 그림.
+   구글 로그인 쿠키를 쓰지 않아서 카카오톡 안에서도, 구글 계정이 여러 개인 휴대폰에서도 열림.
+   ?p=about 회사 소개 · ?p=hdash 출근 현황 · ?p=hpop 출근부 입력 … (없으면 로그인 첫 화면) */
 var APP = "https://script.google.com/macros/s/AKfycbxCrI96jumfaXV3aTNT_njpi_NgnoWlEM_CI6MyEAEQBDK5omELfH2DkYh-1CVmhKs/exec";
-// 이 페이지 주소 뒤의 ?p=about 같은 값을 그대로 넘김 (없으면 그룹웨어 첫 화면 · 로그인)
-var T = APP + (location.search || "");
-var ua = navigator.userAgent || "";
-var go = document.getElementById("go");
-if (/[?&]p=about(&|$)/.test(location.search)) {
-  // 회사 소개는 GitHub 안의 페이지로 (구글 로그인 · 카카오톡과 상관없이 열림)
-  go.href = "about/";
-  location.replace("about/");
-} else if (/KAKAOTALK/i.test(ua)) {
-  // 카카오톡 안의 브라우저에서는 구글 웹앱이 열리지 않음 → 휴대폰 기본 브라우저(크롬·사파리)로 넘김
-  var ext = "kakaotalk://web/openExternal?url=" + encodeURIComponent(T);
-  go.href = ext;
-  document.getElementById("hint").textContent = "카카오톡에서는 휴대폰 기본 브라우저로 열립니다.";
-  location.href = ext;
-} else if (/Line\//i.test(ua)) {
-  go.href = T + (T.indexOf("?") < 0 ? "?" : "&") + "openExternalBrowser=1";
-  location.href = go.href;
-} else if (/NAVER|Instagram|FBAN|FBAV|DaumApps/i.test(ua)) {
-  // 다른 앱 안 브라우저: 자동으로 못 넘기니 안내
-  go.href = T;
-  document.getElementById("hint").textContent = "열리지 않으면 오른쪽 위 메뉴(⋮)에서 '다른 브라우저로 열기'를 눌러 주세요.";
-} else {
-  go.href = T;
-  location.replace(T);
-}
+var p = new URLSearchParams(location.search).get("p") || "";
+var base = location.origin + location.pathname.replace(/[^\/]*$/, "");
+fetch(APP + "?api=page&p=" + encodeURIComponent(p) + "&base=" + encodeURIComponent(base), { credentials: "omit", redirect: "follow" })
+  .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); })
+  .then(function (h) { if (h.indexOf("<html") < 0) throw new Error(h.slice(0, 80)); document.open(); document.write(h); document.close(); })
+  .catch(function (e) {
+    var m = document.getElementById("m");
+    m.innerHTML = "화면을 열지 못했습니다.<br><small></small><br><br><a href=''>다시 시도</a>";
+    m.querySelector("small").textContent = e.message;
+  });
 </script>
 </body>
 </html>
