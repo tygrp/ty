@@ -14,7 +14,7 @@
 <script>
 /* 화면은 그룹웨어(Apps Script)에서 받아 그대로 그림 — 구글 로그인 쿠키를 보내지 않아서
    휴대폰에 구글 계정이 여러 개 있어도, 카카오톡 안에서도 열림. 내용 수정은 그룹웨어 쪽에서만 하면 됨 */
-var APP = "https://script.google.com/macros/s/AKfycbwpFbc_5stHG_gfChcqDM6p6B7ed9PKvthixeW8x1i1MzTNKwQ0hbUNnNuEqcEsd4gN/exec";
+var APP = "https://script.google.com/macros/s/AKfycbxCrI96jumfaXV3aTNT_njpi_NgnoWlEM_CI6MyEAEQBDK5omELfH2DkYh-1CVmhKs/exec";
 fetch(APP + "?api=page", { credentials: "omit", redirect: "follow" })
   .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); })
   .then(function (h) { if (h.indexOf("<html") < 0) throw new Error("응답이 올바르지 않습니다"); document.open(); document.write(h); document.close(); })
