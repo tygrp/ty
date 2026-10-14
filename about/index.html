@@ -1,24 +1,7 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>티지와이 그룹 · 회사 소개</title>
-<meta property="og:title" content="티지와이 그룹 · 회사 소개">
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TY 그룹 · 회사 소개</title>
+<meta property="og:title" content="TY 그룹 · 회사 소개">
 <meta property="og:description" content="From Farm to Franchise — 사육부터 매장까지, 가마치통닭을 만드는 4개 회사">
-<style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#0d2a1c;color:#fff;font-family:-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;text-align:center}
-.sp{width:34px;height:34px;margin:0 auto 14px;border-radius:50%;border:4px solid rgba(255,255,255,.2);border-top-color:#e8930c;animation:r .8s linear infinite}@keyframes r{to{transform:rotate(360deg)}}</style>
-</head>
-<body>
-<div><div class="sp"></div><div id="m">회사 소개를 여는 중…</div></div>
-<script>
-/* 화면은 그룹웨어(Apps Script)에서 받아 그대로 그림 — 구글 로그인 쿠키를 보내지 않아서
-   휴대폰에 구글 계정이 여러 개 있어도, 카카오톡 안에서도 열림. 내용 수정은 그룹웨어 쪽에서만 하면 됨 */
-var APP = "https://script.google.com/macros/s/AKfycbxCrI96jumfaXV3aTNT_njpi_NgnoWlEM_CI6MyEAEQBDK5omELfH2DkYh-1CVmhKs/exec";
-fetch(APP + "?api=page", { credentials: "omit", redirect: "follow" })
-  .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); })
-  .then(function (h) { if (h.indexOf("<html") < 0) throw new Error("응답이 올바르지 않습니다"); document.open(); document.write(h); document.close(); })
-  .catch(function (e) { document.getElementById("m").textContent = "회사 소개를 열지 못했습니다 (" + e.message + "). 잠시 후 다시 시도해 주세요."; });
-</script>
-</body>
-</html>
+<script>location.replace("../?p=about");</script></head>
+<body style="background:#0d2a1c"></body></html>
