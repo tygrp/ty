@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TY 그룹웨어</title>
+<meta property="og:title" content="TY 그룹웨어">
+<meta property="og:description" content="티지와이 · 티와이 · 선교농원 · 티지와이F&amp;B">
+<style>
+  body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;background:#0d2a1c;color:#fff;text-align:center;padding:24px;box-sizing:border-box}
+  .b{max-width:360px}
+  h1{font-size:22px;margin:0 0 8px}
+  p{opacity:.8;font-size:15px;line-height:1.6;margin:0 0 22px}
+  a{display:block;padding:15px;border-radius:12px;background:#e8930c;color:#2a1600;font-weight:800;text-decoration:none;font-size:17px}
+  small{display:block;margin-top:14px;opacity:.6;font-size:13px;line-height:1.5}
+</style>
+</head>
+<body>
+<div class="b">
+  <h1>TY 그룹웨어</h1>
+  <p>잠시 후 화면이 열립니다.</p>
+  <a id="go" href="#">열기</a>
+  <small id="hint"></small>
+</div>
+<script>
+// 그룹웨어 웹앱 주소 (배포 주소가 바뀌면 이 한 줄만 고침)
+var APP = "https://script.google.com/macros/s/AKfycbwuw_rZxXCdu-Fp0bAg-mm9NO1wltIKkuw3A2B4nU7QW28LDei-HBHUyiMU5qktS7zY/exec";
+// 이 페이지 주소 뒤의 ?p=about 같은 값을 그대로 넘김 (없으면 그룹웨어 첫 화면 · 로그인)
+var T = APP + (location.search || "");
+var ua = navigator.userAgent || "";
+var go = document.getElementById("go");
+if (/KAKAOTALK/i.test(ua)) {
+  // 카카오톡 안의 브라우저에서는 구글 웹앱이 열리지 않음 → 휴대폰 기본 브라우저(크롬·사파리)로 넘김
+  var ext = "kakaotalk://web/openExternal?url=" + encodeURIComponent(T);
+  go.href = ext;
+  document.getElementById("hint").textContent = "카카오톡에서는 휴대폰 기본 브라우저로 열립니다.";
+  location.href = ext;
+} else if (/Line\//i.test(ua)) {
+  go.href = T + (T.indexOf("?") < 0 ? "?" : "&") + "openExternalBrowser=1";
+  location.href = go.href;
+} else if (/NAVER|Instagram|FBAN|FBAV|DaumApps/i.test(ua)) {
+  // 다른 앱 안 브라우저: 자동으로 못 넘기니 안내
+  go.href = T;
+  document.getElementById("hint").textContent = "열리지 않으면 오른쪽 위 메뉴(⋮)에서 '다른 브라우저로 열기'를 눌러 주세요.";
+} else {
+  go.href = T;
+  location.replace(T);
+}
+</script>
+</body>
+</html>
