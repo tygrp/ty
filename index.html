@@ -16,7 +16,7 @@ a{color:#ffc565}</style>
 /* 그룹웨어 화면을 Apps Script 에서 받아 이 주소(GitHub) 안에서 그림.
    구글 로그인 쿠키를 쓰지 않아서 카카오톡 안에서도, 구글 계정이 여러 개인 휴대폰에서도 열림.
    ?p=about 회사 소개 · ?p=market 시장 분석 · ?p=hdash 출근 현황 … (없으면 로그인 첫 화면) */
-var APP = "https://script.google.com/macros/s/AKfycbyR197yTtRgcUbA-WZdF7NmChkEVwyuMphn9tojhGz_-th2DnMhM3iKf_qllBH9F20s/exec";
+var APP = "https://script.google.com/macros/s/AKfycbwKLWCubpqeMw7BjgTZ4YmEqr_snT3W7cM0fyMOKctJsN-K1Je9aKZlS7SMcNw3wCdj/exec";
 var p = new URLSearchParams(location.search).get("p") || "";
 var base = location.origin + location.pathname.replace(/[^\/]*$/, "");
 fetch(APP + "?api=page&p=" + encodeURIComponent(p) + "&base=" + encodeURIComponent(base), { credentials: "omit", redirect: "follow" })
