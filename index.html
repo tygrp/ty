@@ -25,7 +25,8 @@ var base = location.origin + location.pathname.replace(/[^\/]*$/, "");
 var K = "tyPage|" + p + "|" + APP, RK = "tyReload|" + p;
 function get(k, s) { try { return (s || localStorage).getItem(k); } catch (e) { return null; } }
 function put(k, v, s) { try { (s || localStorage).setItem(k, v); } catch (e) { try { Object.keys(localStorage).filter(function (x) { return x.indexOf("tyPage|") === 0 && x !== K; }).forEach(function (x) { localStorage.removeItem(x); }); localStorage.setItem(k, v); } catch (e2) {} } }
-function draw(h) { document.open(); document.write(h); document.close(); }
+function draw(h) { function go() { document.open(); document.write(h); document.close(); }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", go); else go(); }   /* 읽는 중에 쓰면 덧붙여지므로 다 읽은 뒤 바꿔 그림 */
 window.TY_GH_APP = APP;   /* 첫 화면이 메뉴 화면을 미리 받아 둘 때 같은 열쇠를 씀 */
 var old = get(K);
 var f = fetch(APP + "?api=page&p=" + encodeURIComponent(p) + "&base=" + encodeURIComponent(base), { credentials: "omit", redirect: "follow" })
