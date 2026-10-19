@@ -19,7 +19,7 @@ a{color:#ffc565}</style>
    빠르게: 지난번에 받은 화면을 이 기기에 저장해 두고 바로 그린 뒤, 뒤에서 새 화면을 받아 바뀌었으면 한 번만 새로 고침.
    ?p=about 회사 소개 · ?p=hdash 출근 현황 · ?p=hpop 출근부 입력 … (없으면 로그인 첫 화면) */
 (function () {
-var APP = "https://script.google.com/macros/s/AKfycbwKLWCubpqeMw7BjgTZ4YmEqr_snT3W7cM0fyMOKctJsN-K1Je9aKZlS7SMcNw3wCdj/exec";
+var APP = "https://script.google.com/macros/s/AKfycbznKmaMD0Kp1Jb_9ayCeNDvl8U0XrbYK1v0NpNulgjhi2lMbQz1PmHYtCZSH1t3iyEM/exec";
 var p = new URLSearchParams(location.search).get("p") || "";
 var base = location.origin + location.pathname.replace(/[^\/]*$/, "");
 var K = "tyPage|" + p + "|" + APP, RK = "tyReload|" + p;
