@@ -6,8 +6,7 @@
 <title>TY 그룹웨어</title>
 <meta property="og:title" content="TY 그룹웨어">
 <meta property="og:description" content="티지와이 · 티와이 · 선교농원 · 티지와이F&amp;B">
-<link rel="preconnect" href="https://script.google.com">
-<link rel="preconnect" href="https://script.googleusercontent.com">
+<link rel="preconnect" href="https://gas-qguugvbmha-du.a.run.app">
 <style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#0d2a1c;color:#fff;font-family:-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;text-align:center;padding:24px;box-sizing:border-box}
 .sp{width:34px;height:34px;margin:0 auto 14px;border-radius:50%;border:4px solid rgba(255,255,255,.2);border-top-color:#e8930c;animation:r .8s linear infinite}@keyframes r{to{transform:rotate(360deg)}}
 a{color:#ffc565}</style>
@@ -19,7 +18,8 @@ a{color:#ffc565}</style>
    빠르게: 지난번에 받은 화면을 이 기기에 저장해 두고 바로 그린 뒤, 뒤에서 새 화면을 받아 바뀌었으면 한 번만 새로 고침.
    ?p=about 회사 소개 · ?p=hdash 출근 현황 · ?p=hpop 출근부 입력 … (없으면 로그인 첫 화면) */
 (function () {
-var APP = "https://script.google.com/macros/s/AKfycbznKmaMD0Kp1Jb_9ayCeNDvl8U0XrbYK1v0NpNulgjhi2lMbQz1PmHYtCZSH1t3iyEM/exec";
+var APP = "https://gas-qguugvbmha-du.a.run.app/ty/exec";   /* 새 서버 (2026-10-25 전환) · 되돌리려면 아래 옛 주소로 */
+/* 옛 Apps Script: https://script.google.com/macros/s/AKfycbznKmaMD0Kp1Jb_9ayCeNDvl8U0XrbYK1v0NpNulgjhi2lMbQz1PmHYtCZSH1t3iyEM/exec */
 var p = new URLSearchParams(location.search).get("p") || "";
 var base = location.origin + location.pathname.replace(/[^\/]*$/, "");
 var K = "tyPage|" + p + "|" + APP, RK = "tyReload|" + p;
